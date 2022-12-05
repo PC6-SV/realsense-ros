@@ -60,6 +60,10 @@ configurable_parameters = [{'name': 'camera_name',                  'default': '
                            {'name': 'depth_module.gain.2',         'default': '16', 'description': 'Initial value for hdr_merge filter'},
                            {'name': 'wait_for_device_timeout',      'default': '-1.', 'description': 'Timeout for waiting for device to connect (Seconds)'},
                            {'name': 'reconnect_timeout',            'default': '6.', 'description': 'Timeout(seconds) between consequtive reconnection attempts'},
+			               {'name': 'depth_camera_info_topic',            'default': '/depth_camera_info', 'description': 'Topic for depth camera info'},
+			               {'name': 'depth_topic',            'default': '/depth', 'description': 'Topic for depth'},
+			               {'name': 'odom_topic',            'default': '/odom', 'description': 'Topic for odometry'},
+			               {'name': 'points_topic',            'default': '/points2', 'description': 'Topic for point cloud'},
                           ]
 
 def declare_configurable_parameters(parameters):
@@ -84,6 +88,12 @@ def generate_launch_description():
                             ],
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
+                remappings=[
+                    ('depth/camera_info', LaunchConfiguration("depth_camera_info_topic")),
+                    ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
+                    ('pose/sample', LaunchConfiguration("odom_topic")),
+                    ('depth/color/points', LaunchConfiguration("points_topic")),
+                ]
                 ),
             launch_ros.actions.Node(
                 condition=IfCondition(PythonExpression([LaunchConfiguration('config_file'), " != ''"])),
@@ -97,6 +107,12 @@ def generate_launch_description():
                             ],
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
+                remappings=[
+                    ('depth/camera_info', LaunchConfiguration("depth_camera_info_topic")),
+                    ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
+                    ('pose/sample', LaunchConfiguration("odom_topic")),
+                    ('depth/color/points', LaunchConfiguration("points_topic")),
+                ]
                 ),
             ])
     else:
@@ -113,6 +129,12 @@ def generate_launch_description():
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
                 emulate_tty=True,
+                remappings=[
+                    ('depth/camera_info', LaunchConfiguration("depth_camera_info_topic")),
+                    ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
+                    ('pose/sample', LaunchConfiguration("odom_topic")),
+                    ('depth/color/points', LaunchConfiguration("points_topic")),
+                ]
                 ),
             launch_ros.actions.Node(
                 condition=IfCondition(PythonExpression([LaunchConfiguration('config_file'), " != ''"])),
@@ -126,5 +148,11 @@ def generate_launch_description():
                 output='screen',
                 arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')],
                 emulate_tty=True,
+                remappings=[
+                    ('depth/camera_info', LaunchConfiguration("depth_camera_info_topic")),
+                    ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
+                    ('pose/sample', LaunchConfiguration("odom_topic")),
+                    ('depth/color/points', LaunchConfiguration("points_topic")),
+                ]
                 ),
         ])
