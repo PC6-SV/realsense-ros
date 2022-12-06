@@ -64,6 +64,7 @@ configurable_parameters = [{'name': 'camera_name',                  'default': '
 			               {'name': 'depth_topic',            'default': '/depth', 'description': 'Topic for depth'},
 			               {'name': 'odom_topic',            'default': '/odom', 'description': 'Topic for odometry'},
 			               {'name': 'points_topic',            'default': '/points2', 'description': 'Topic for point cloud'},
+			               {'name': 'image_topic',            'default': '/image', 'description': 'Topic for raw image'},
                           ]
 
 def declare_configurable_parameters(parameters):
@@ -93,6 +94,7 @@ def generate_launch_description():
                     ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
+                    ('color/image_raw', LaunchConfiguration("image_topic")),
                 ]
                 ),
             launch_ros.actions.Node(
@@ -112,6 +114,7 @@ def generate_launch_description():
                     ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
+                    ('color/image_raw', LaunchConfiguration("image_topic")),
                 ]
                 ),
             ])
@@ -134,6 +137,7 @@ def generate_launch_description():
                     ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
+                    ('color/image_raw', LaunchConfiguration("image_topic")),
                 ]
                 ),
             launch_ros.actions.Node(
@@ -153,6 +157,7 @@ def generate_launch_description():
                     ('depth/image_rect_raw', LaunchConfiguration("depth_topic")),
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
+                    ('color/image_raw', LaunchConfiguration("image_topic")),
                 ]
                 ),
         ])
