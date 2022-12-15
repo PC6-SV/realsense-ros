@@ -824,7 +824,17 @@ void BaseRealSenseNode::publish_static_tf(const rclcpp::Time& t,
     msg.transform.rotation.y = q.getY();
     msg.transform.rotation.z = q.getZ();
     msg.transform.rotation.w = q.getW();
-    _static_tf_msgs.push_back(msg);
+    auto iter = find_if(_static_tf_msgs.begin(), _static_tf_msgs.end(), [&to](const auto& element) {return element.child_frame_id == to;});
+    if (iter != _static_tf_msgs.end())
+    {
+        *iter = msg; 
+
+    }
+    else
+    {
+        _static_tf_msgs.push_back(msg);
+    }
+    
 }
 
 void BaseRealSenseNode::publishExtrinsicsTopic(const stream_index_pair& sip, const rs2_extrinsics& ex){

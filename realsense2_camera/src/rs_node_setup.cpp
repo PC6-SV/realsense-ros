@@ -319,7 +319,7 @@ void BaseRealSenseNode::updateSensors()
                     updateProfilesStreamCalibData(wanted_profiles);
                     {
                         std::lock_guard<std::mutex> lock_guard(_publish_tf_mutex);
-                        _static_tf_msgs.clear();
+                        //_static_tf_msgs.clear();
                         publishStaticTransforms(wanted_profiles);
                     }
 
