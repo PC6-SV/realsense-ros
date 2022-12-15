@@ -60,11 +60,12 @@ configurable_parameters = [{'name': 'camera_name',                  'default': '
                            {'name': 'depth_module.gain.2',         'default': '16', 'description': 'Initial value for hdr_merge filter'},
                            {'name': 'wait_for_device_timeout',      'default': '-1.', 'description': 'Timeout for waiting for device to connect (Seconds)'},
                            {'name': 'reconnect_timeout',            'default': '6.', 'description': 'Timeout(seconds) between consequtive reconnection attempts'},
-			               {'name': 'depth_camera_info_topic',            'default': '/depth_camera_info', 'description': 'Topic for depth camera info'},
-			               {'name': 'depth_topic',            'default': '/depth', 'description': 'Topic for depth'},
-			               {'name': 'odom_topic',            'default': '/odom', 'description': 'Topic for odometry'},
-			               {'name': 'points_topic',            'default': '/points2', 'description': 'Topic for point cloud'},
-			               {'name': 'image_topic',            'default': '/image', 'description': 'Topic for raw image'},
+			   {'name': 'depth_camera_info_topic',            'default': '/depth_camera_info', 'description': 'Topic for depth camera info'},
+			   {'name': 'depth_topic',            'default': '/depth', 'description': 'Topic for depth'},
+			   {'name': 'odom_topic',            'default': '/odom', 'description': 'Topic for odometry'},
+			   {'name': 'points_topic',            'default': '/points2', 'description': 'Topic for point cloud'},
+			   {'name': 'image_topic',            'default': '/image', 'description': 'Topic for raw image'},
+			   {'name': 'imu_topic',            'default': '/imu', 'description': 'Topic for raw image'},
                           ]
 
 def declare_configurable_parameters(parameters):
@@ -95,6 +96,7 @@ def generate_launch_description():
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
                     ('color/image_raw', LaunchConfiguration("image_topic")),
+                    ('imu', LaunchConfiguration("imu_topic")),
                 ]
                 ),
             launch_ros.actions.Node(
@@ -115,6 +117,7 @@ def generate_launch_description():
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
                     ('color/image_raw', LaunchConfiguration("image_topic")),
+                    ('imu', LaunchConfiguration("imu_topic")),
                 ]
                 ),
             ])
@@ -138,6 +141,7 @@ def generate_launch_description():
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
                     ('color/image_raw', LaunchConfiguration("image_topic")),
+                    ('imu', LaunchConfiguration("imu_topic")),
                 ]
                 ),
             launch_ros.actions.Node(
@@ -158,6 +162,7 @@ def generate_launch_description():
                     ('pose/sample', LaunchConfiguration("odom_topic")),
                     ('depth/color/points', LaunchConfiguration("points_topic")),
                     ('color/image_raw', LaunchConfiguration("image_topic")),
+                    ('imu', LaunchConfiguration("imu_topic")),
                 ]
                 ),
         ])
